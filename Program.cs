@@ -74,29 +74,36 @@ namespace core_app
 
         static void Main(string[] args)
         {
-            // CancellationToken demo
-            Task.Run(() => ContinuousTick());
+            object o = 100;
 
-            System.Console.WriteLine("Press any key to stop the clock.");
-            System.Console.ReadKey();
-            cancellationTokenSource.Cancel();
-
-            System.Console.WriteLine("Clock stopped.");
-            System.Console.ReadKey();
+            switch(o)
+            {
+                case string a:
+                    if(a.Length > 0)
+                    {
+                        System.Console.WriteLine(a);
+                    }
+                    break;
+                case int i:
+                    if(i % 2 == 0)
+                    {
+                        System.Console.WriteLine("{0} is an even number.", i);
+                    }
+                    break;
+            }
             
-            // var webPage = GetWebPageAsync("https://www.newinti.edu.my").Result;
-            // System.Console.WriteLine(webPage);
+            
+            
+            
+            // CancellationToken demo
+            // Task.Run(() => ContinuousTick());
 
-            // var multipleWebPages = GetWebPagesAsync(new string[] {
-            //     "https://www.newinti.edu.my",
-            //     "https://www.adriankhor.my"
-            // }).Result;
+            // System.Console.WriteLine("Press any key to stop the clock.");
+            // System.Console.ReadKey();
+            // cancellationTokenSource.Cancel();
 
-            // foreach(var result in multipleWebPages)
-            // {
-            //     System.Console.WriteLine(result);
-            //     System.Console.WriteLine();
-            // }
+            // System.Console.WriteLine("Clock stopped.");
+            // System.Console.ReadKey();
         }
     }
 }
