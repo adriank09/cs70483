@@ -2,12 +2,15 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace core_app
 {
     class Program
     {
+        static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
         static async Task<string> GetWebPageAsync(string url)
         {
             var httpClient = new HttpClient();
@@ -27,7 +30,7 @@ namespace core_app
             return await Task.WhenAll(tasks);
         }
         
-        static void Main(string[] args)
+        static void BlockingCollectionDemo()
         {
             BlockingCollection<int> data = new BlockingCollection<int>(10);
             
@@ -58,9 +61,28 @@ namespace core_app
                     }
                 }
             });
-            
-            
-            
+        }
+
+        static void ContinuousTick()
+        {
+            while(!cancellationTokenSource.IsCancellationRequested)
+            {
+                System.Console.WriteLine("Tick... {0}", DateTime.Now);
+                Thread.Sleep(500);
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            // CancellationToken demo
+            Task.Run(() => ContinuousTick());
+
+            System.Console.WriteLine("Press any key to stop the clock.");
+            System.Console.ReadKey();
+            cancellationTokenSource.Cancel();
+
+            System.Console.WriteLine("Clock stopped.");
+            System.Console.ReadKey();
             
             // var webPage = GetWebPageAsync("https://www.newinti.edu.my").Result;
             // System.Console.WriteLine(webPage);
