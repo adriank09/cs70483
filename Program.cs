@@ -72,38 +72,34 @@ namespace core_app
             }
         }
 
+        static void TaskCancellationDemo()
+        {
+            // CancellationToken demo
+            Task.Run(() => ContinuousTick());
+
+            System.Console.WriteLine("Press any key to stop the clock.");
+            System.Console.ReadKey();
+            cancellationTokenSource.Cancel();
+
+            System.Console.WriteLine("Clock stopped.");
+            System.Console.ReadKey();
+        }
+
         static void Main(string[] args)
         {
-            object o = 100;
+            // TaskCancellationDemo();
 
-            switch(o)
-            {
-                case string a:
-                    if(a.Length > 0)
-                    {
-                        System.Console.WriteLine(a);
-                    }
-                    break;
-                case int i:
-                    if(i % 2 == 0)
-                    {
-                        System.Console.WriteLine("{0} is an even number.", i);
-                    }
-                    break;
-            }
-            
-            
-            
-            
-            // CancellationToken demo
-            // Task.Run(() => ContinuousTick());
+            Person p = new Person("John Doe", "New York", 25);
+            System.Console.WriteLine("Name: {0}", p.Name);
+            p.NameChanged += OnNameChanged;
+            p.SetName("Max Doe");
 
-            // System.Console.WriteLine("Press any key to stop the clock.");
-            // System.Console.ReadKey();
-            // cancellationTokenSource.Cancel();
+            System.Console.WriteLine("Name: {0}", p.Name);
+        }
 
-            // System.Console.WriteLine("Clock stopped.");
-            // System.Console.ReadKey();
+        static void OnNameChanged(Person p)
+        {
+            System.Console.WriteLine("Hello there, {0}!",p.Name);
         }
     }
 }
