@@ -87,6 +87,7 @@ namespace core_app
 
         delegate int GetValue();
         static GetValue getLocalInt;
+        delegate int IntOperation(int a, int b);
 
         static void Main(string[] args)
         {
@@ -97,6 +98,32 @@ namespace core_app
             getLocalInt = () => localInt;
 
             System.Console.WriteLine(getLocalInt());
+
+            //////////////////////////////////////
+            // uses the delegate IntOperation
+            IntOperation add = (int x, int y) =>  x+y;
+            System.Console.WriteLine(add(2,3));
+
+            IntOperation sub = (int a, int b) => a-b;
+            System.Console.WriteLine(sub(2,3));
+            //////////////////////////////////////
+
+            //////////////////////////////////////
+            //  uses the Func built in delegate
+            Func<int, int, int> mul = (int a, int b) => a*b;
+            System.Console.WriteLine(mul(2,3));
+
+
+            Action<string> logMessage = (string message) => 
+                System.Console.WriteLine("Message logged: {0}", message);
+
+            logMessage(mul(5,5).ToString());
+
+            Predicate<int> dividesByThree = (int i) =>
+                i % 3 == 0;
+
+            System.Console.WriteLine(dividesByThree(3));
+            System.Console.WriteLine(dividesByThree(5));
         }
 
         static void AssignCountry(object sender, PersonEventArgs e)
