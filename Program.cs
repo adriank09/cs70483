@@ -89,17 +89,30 @@ namespace core_app
         {
             // TaskCancellationDemo();
 
-            Person p = new Person("John Doe", "New York", 25);
-            System.Console.WriteLine("Name: {0}", p.Name);
-            p.NameChanged += OnNameChanged;
-            p.SetName("Max Doe");
+            // Person p = new Person("John Doe", "New York", 25);
+            // System.Console.WriteLine("Name: {0}", p.Name);
+            // p.SetName("Max Doe");
+        
+            // System.Console.WriteLine("Name: {0}", p.Name);
+            // p.CountryAssigned += AssignCountry;
+            // p.AssignCountry("USA");
 
-            System.Console.WriteLine("Name: {0}", p.Name);
+
         }
 
-        static void OnNameChanged(Person p)
+        static void AssignCountry(object sender, PersonEventArgs e)
         {
-            System.Console.WriteLine("Hello there, {0}!",p.Name);
+            System.Console.WriteLine("Person assigned country.");
+            System.Console.WriteLine("Person country: {0}", e.Country);
+        }
+        static void AgeChanged(object sender, EventArgs e)
+        {
+            if(sender is Person)
+            {
+                var p = sender as Person;
+
+
+            }
         }
     }
 }

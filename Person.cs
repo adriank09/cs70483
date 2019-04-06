@@ -9,17 +9,20 @@ class Person
 
     // Delegates
     // Delegate for the name changed event
-    public Action<Person> NameChanged { get; set; }
-
+    public event EventHandler NameChanged = delegate {};
+    public event EventHandler AgeChanged = delegate {};
+    public event EventHandler CountryAssigned = delegate {};
     public void SetName(string name)
     {
         Name = name;
 
-        // Raise the NameChanged event if it is subscribed.
-        if(NameChanged != null)
-        {
-            NameChanged(this);
-        }
+        // Raise the NameChanged event.
+        NameChanged(this, EventArgs.Empty);
+    }
+
+    public void SetAge(int age)
+    {
+        Age = age;
     }
 
     // Constructor
@@ -33,8 +36,18 @@ class Person
         NameChanged += OnNameChanged;
     }
 
-    private void OnNameChanged(Person p)
+    private void OnNameChanged(object sender, EventArgs e)
     {
-        System.Console.WriteLine("Name for this person was set to: {0}.", p.Name);
+        if(sender is Person)
+        {
+            var p = sender as Person;
+            System.Console.WriteLine("Name for this person was set to: {0}.", p.Name);
+        }
     }
+
+    public void AssignCountry(string country) => 
+        CountryAssigned(this, new PersonEventArgs(country));
+
+    
+
 }
