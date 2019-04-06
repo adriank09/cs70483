@@ -85,19 +85,18 @@ namespace core_app
             System.Console.ReadKey();
         }
 
+        delegate int GetValue();
+        static GetValue getLocalInt;
+
         static void Main(string[] args)
         {
-            // TaskCancellationDemo();
+            // local variable set to 99
+            int localInt = 99;
 
-            // Person p = new Person("John Doe", "New York", 25);
-            // System.Console.WriteLine("Name: {0}", p.Name);
-            // p.SetName("Max Doe");
-        
-            // System.Console.WriteLine("Name: {0}", p.Name);
-            // p.CountryAssigned += AssignCountry;
-            // p.AssignCountry("USA");
+            // set delegate getLocalInt to a lambda expression that returns the value of localInt
+            getLocalInt = () => localInt;
 
-
+            System.Console.WriteLine(getLocalInt());
         }
 
         static void AssignCountry(object sender, PersonEventArgs e)
