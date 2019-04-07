@@ -91,39 +91,43 @@ namespace core_app
 
         static void Main(string[] args)
         {
-            // local variable set to 99
-            int localInt = 99;
+            // TODO: study how CancellationToken functions and how it can be used
+            // in a desktop app env.
+            
+            
+            // // local variable set to 99
+            // int localInt = 99;
 
-            // set delegate getLocalInt to a lambda expression that returns the value of localInt
-            getLocalInt = () => localInt;
+            // // set delegate getLocalInt to a lambda expression that returns the value of localInt
+            // getLocalInt = () => localInt;
 
-            System.Console.WriteLine(getLocalInt());
+            // System.Console.WriteLine(getLocalInt());
 
-            //////////////////////////////////////
-            // uses the delegate IntOperation
-            IntOperation add = (int x, int y) =>  x+y;
-            System.Console.WriteLine(add(2,3));
+            // //////////////////////////////////////
+            // // uses the delegate IntOperation
+            // IntOperation add = (int x, int y) =>  x+y;
+            // System.Console.WriteLine(add(2,3));
 
-            IntOperation sub = (int a, int b) => a-b;
-            System.Console.WriteLine(sub(2,3));
-            //////////////////////////////////////
+            // IntOperation sub = (int a, int b) => a-b;
+            // System.Console.WriteLine(sub(2,3));
+            // //////////////////////////////////////
 
-            //////////////////////////////////////
-            //  uses the Func built in delegate
-            Func<int, int, int> mul = (int a, int b) => a*b;
-            System.Console.WriteLine(mul(2,3));
+            // //////////////////////////////////////
+            // //  uses the Func built in delegate
+            // Func<int, int, int> Multiple = (int a, int b) => a*b;
+            // System.Console.WriteLine(Multiple(2,3));
 
 
-            Action<string> logMessage = (string message) => 
-                System.Console.WriteLine("Message logged: {0}", message);
+            // Action<string> logMessage = (string message) => 
+            //     System.Console.WriteLine("Message logged: {0}", message);
 
-            logMessage(mul(5,5).ToString());
+            // logMessage(Multiple(5,5).ToString());
 
-            Predicate<int> dividesByThree = (int i) =>
-                i % 3 == 0;
+            // Predicate<int> dividesByThree = (int i) =>
+            //     i % 3 == 0;
 
-            System.Console.WriteLine(dividesByThree(3));
-            System.Console.WriteLine(dividesByThree(5));
+            // System.Console.WriteLine(dividesByThree(3));
+            // System.Console.WriteLine(dividesByThree(5));
         }
 
         static void AssignCountry(object sender, PersonEventArgs e)
